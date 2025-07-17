@@ -1,0 +1,166 @@
+/* Estilos generales para el cuerpo de la página */
+body {
+    font-family: Arial, sans-serif; /* Fuente principal para todo el texto */
+    line-height: 1.6; /* Espaciado entre líneas para mejor legibilidad */
+    margin: 0; /* Elimina el margen predeterminado del navegador */
+    padding: 0; /* Elimina el padding predeterminado del navegador */
+    background: #f4f4f4; /* Color de fondo suave para la página */
+    color: #333; /* Color de texto principal */
+}
+
+/* Estilos para el encabezado de la página */
+header {
+    background: #5a2e6b; /* Color de fondo oscuro para el encabezado */
+    color: #fff; /* Color de texto blanco para el encabezado */
+    padding: 1rem 0; /* Espaciado interno superior e inferior */
+    text-align: center; /* Centra el texto */
+}
+
+header h1 {
+    margin: 0; /* Elimina el margen predeterminado del título */
+}
+
+/* Estilos para la barra de navegación */
+nav {
+    background: #6b3f7c; /* Color de fondo para la navegación, ligeramente diferente */
+    color: #fff; /* Color de texto blanco */
+    padding: 0.5rem 0; /* Espaciado interno */
+    text-align: center; /* Centra los elementos de navegación */
+}
+
+nav ul {
+    list-style: none; /* Elimina los puntos de lista */
+    padding: 0; /* Elimina el padding predeterminado de la lista */
+    margin: 0; /* Elimina el margen predeterminado de la lista */
+    display: flex; /* Utiliza flexbox para alinear los elementos horizontalmente */
+    justify-content: center; /* Centra los elementos */
+}
+
+nav ul li {
+    margin: 0 15px; /* Espaciado entre cada elemento de la lista */
+}
+
+nav ul li a {
+    color: #fff; /* Color de los enlaces */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    padding: 5px 10px; /* Espaciado interno para los enlaces */
+    transition: background-color 0.3s ease; /* Transición suave al pasar el ratón */
+}
+
+nav ul li a:hover {
+    background-color: #8c5d9e; /* Color de fondo al pasar el ratón por los enlaces */
+    border-radius: 5px; /* Bordes redondeados al hacer hover */
+}
+
+/* Estilos para la sección principal del contenido */
+main {
+    padding: 20px; /* Espaciado interno alrededor del contenido principal */
+    max-width: 960px; /* Ancho máximo para el contenido */
+    margin: 20px auto; /* Centra el contenido en la página */
+    background: #fff; /* Fondo blanco para el contenido */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave alrededor del contenido */
+    border-radius: 8px; /* Bordes ligeramente redondeados */
+}
+
+/* Estilos para cada sección dentro del contenido principal */
+section {
+    margin-bottom: 30px; /* Espaciado inferior entre secciones */
+    padding-bottom: 20px; /* Espaciado interno inferior */
+    border-bottom: 1px solid #eee; /* Línea divisoria suave entre secciones */
+}
+
+section:last-child {
+    border-bottom: none; /* Elimina la línea divisoria de la última sección */
+}
+
+section h2 {
+    color: #5a2e6b; /* Color del título de la sección */
+    text-align: center; /* Centra el título de la sección */
+    margin-bottom: 20px; /* Espaciado inferior del título */
+}
+
+/* Estilos para tablas (usadas en precios) */
+table {
+    width: 100%; /* La tabla ocupa todo el ancho disponible */
+    border-collapse: collapse; /* Colapsa los bordes de la tabla */
+    margin-top: 15px; /* Espaciado superior */
+}
+
+table th, table td {
+    border: 1px solid #ddd; /* Borde para celdas de la tabla */
+    padding: 10px; /* Espaciado interno de celdas */
+    text-align: left; /* Alineación del texto a la izquierda */
+}
+
+table th {
+    background-color: #6b3f7c; /* Color de fondo para los encabezados de la tabla */
+    color: white; /* Color de texto para los encabezados */
+}
+
+/* Estilos para formularios */
+form {
+    display: flex; /* Utiliza flexbox para organizar los elementos del formulario */
+    flex-direction: column; /* Apila los elementos verticalmente */
+    gap: 15px; /* Espaciado entre los elementos del formulario */
+    margin-top: 20px; /* Espaciado superior del formulario */
+}
+
+form label {
+    font-weight: bold; /* Texto de la etiqueta en negrita */
+    color: #5a2e6b; /* Color de la etiqueta */
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"],
+form textarea {
+    padding: 10px; /* Espaciado interno para campos de entrada y textarea */
+    border: 1px solid #ccc; /* Borde suave */
+    border-radius: 5px; /* Bordes redondeados */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+}
+
+form button {
+    background-color: #5a2e6b; /* Color de fondo del botón */
+    color: white; /* Color de texto del botón */
+    padding: 12px 20px; /* Espaciado interno del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+    font-size: 1rem; /* Tamaño de fuente del botón */
+    transition: background-color 0.3s ease; /* Transición suave al pasar el ratón */
+}
+
+form button:hover {
+    background-color: #8c5d9e; /* Color de fondo del botón al pasar el ratón */
+}
+
+#formMessage {
+    margin-top: 10px; /* Espaciado superior para mensajes del formulario */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Centra el texto */
+    display: none; /* Oculto por defecto, se muestra con JavaScript */
+}
+
+.success {
+    background-color: #d4edda; /* Fondo verde claro para éxito */
+    color: #155724; /* Texto verde oscuro para éxito */
+    border: 1px solid #c3e6cb; /* Borde verde claro */
+}
+
+.error {
+    background-color: #f8d7da; /* Fondo rojo claro para error */
+    color: #721c24; /* Texto rojo oscuro para error */
+    border: 1px solid #f5c6cb; /* Borde rojo claro */
+}
+
+/* Estilos para el pie de página */
+footer {
+    text-align: center; /* Centra el texto */
+    padding: 20px; /* Espaciado interno */
+    background: #333; /* Color de fondo oscuro */
+    color: #fff; /* Color de texto blanco */
+    margin-top: 30px; /* Espaciado superior */
+}
