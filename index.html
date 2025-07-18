@@ -3,108 +3,691 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masajes Armonía - Tu Espacio de Bienestar</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Serenity Spa - Centro de Masajes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #4a4a4a;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Menú lateral */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+            position: fixed;
+            height: 100vh;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.mobile-hidden {
+            transform: translateX(-100%);
+        }
+
+        .logo {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .logo h1 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .logo p {
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .nav-menu {
+            padding: 20px 0;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 18px 25px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transition: left 0.3s ease;
+        }
+
+        .nav-item:hover:before {
+            left: 0;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(5px);
+        }
+
+        .nav-item.active {
+            background: rgba(255,255,255,0.3);
+            border-left: 4px solid #fff;
+        }
+
+        /* Contenido principal */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .section {
+            padding: 60px 40px;
+            min-height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .section.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .section h2 {
+            font-size: 36px;
+            color: #5a4b6b;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Sección Inicio */
+        .inicio {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .cta-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Sección Experiencia */
+        .experiencia {
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8c0 100%);
+        }
+
+        .experiencia-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .experiencia-card {
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .experiencia-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .experiencia-card h3 {
+            color: #5a4b6b;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        /* Sección Servicios */
+        .servicios {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .servicio-card {
+            background: rgba(255,255,255,0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+
+        .servicio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .servicio-card h3 {
+            color: #5a4b6b;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .precio {
+            font-size: 18px;
+            color: #667eea;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* Sección Ubicación */
+        .ubicacion {
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8c0 100%);
+        }
+
+        .ubicacion-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .map-placeholder {
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .direccion-info {
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .direccion-info h3 {
+            color: #5a4b6b;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(90,75,107,0.1);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-item strong {
+            color: #5a4b6b;
+        }
+
+        /* Sección Contacto */
+        .contacto {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .contacto-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .contacto-info {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contacto-form {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 16px;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .submit-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .submit-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Botón hamburguesa para móvil */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .sidebar {
+                width: 100%;
+                transform: translateX(-100%);
+            }
+
+            .sidebar.mobile-visible {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .section {
+                padding: 40px 20px;
+                padding-top: 80px;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            .section h2 {
+                font-size: 28px;
+            }
+
+            .servicios-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ubicacion-content,
+            .contacto-content {
+                grid-template-columns: 1fr;
+            }
+
+            .experiencia-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Masajes Armonía</h1>
-        <p>Tu refugio de relajación y bienestar</p>
-    </header>
+    <div class="container">
+        <!-- Botón hamburguesa para móvil -->
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
 
-    <nav>
-        <ul>
-            <li><a href="#experiencia">Nuestra Experiencia</a></li>
-            <li><a href="#precios">Precios y Servicios</a></li>
-            <li><a href="#ubicacion">Dónde Encontrarnos</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-        </ul>
-    </nav>
+        <!-- Menú lateral -->
+        <nav class="sidebar" id="sidebar">
+            <div class="logo">
+                <h1>Serenity Spa</h1>
+                <p>Encuentra tu equilibrio interior</p>
+            </div>
+            <div class="nav-menu">
+                <button class="nav-item active" onclick="showSection('inicio')">🏠 Inicio</button>
+                <button class="nav-item" onclick="showSection('experiencia')">✨ Experiencia</button>
+                <button class="nav-item" onclick="showSection('servicios')">💆 Servicios y Precios</button>
+                <button class="nav-item" onclick="showSection('ubicacion')">📍 Ubicación</button>
+                <button class="nav-item" onclick="showSection('contacto')">📞 Contacto</button>
+            </div>
+        </nav>
 
-    <main>
-        <section id="experiencia">
-            <h2>Nuestra Experiencia</h2>
-            <p>En Masajes Armonía, nos dedicamos a ofrecer un oasis de tranquilidad. Con más de 10 años de experiencia, nuestros terapeutas están altamente cualificados en diversas técnicas de masaje, incluyendo masaje sueco, tejido profundo, aromaterapia y reflexología. Nuestro objetivo es personalizar cada sesión para satisfacer tus necesidades individuales, promoviendo la relajación, el alivio del dolor y el bienestar general.</p>
-            <p>Creemos en el poder del tacto terapéutico para restaurar el equilibrio del cuerpo y la mente. Cada visita es una oportunidad para desconectar del estrés diario y reconectar contigo mismo.</p>
-        </section>
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <!-- Sección Inicio -->
+            <section id="inicio" class="section inicio active">
+                <div class="hero-content">
+                    <h1>Bienvenido a Serenity Spa</h1>
+                    <p>Descubre un oasis de tranquilidad donde el bienestar y la relajación se encuentran. Nuestros masajes terapéuticos te ayudarán a liberar el estrés, renovar tu energía y reconectar contigo mismo.</p>
+                </div>
+            </section>
 
-        <section id="precios">
-            <h2>Precios y Servicios</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Servicio</th>
-                        <th>Duración</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Masaje Relajante</td>
-                        <td>60 min</td>
-                        <td>50€</td>
-                    </tr>
-                    <tr>
-                        <td>Masaje de Tejido Profundo</td>
-                        <td>90 min</td>
-                        <td>75€</td>
-                    </tr>
-                    <tr>
-                        <td>Masaje con Aromaterapia</td>
-                        <td>60 min</td>
-                        <td>60€</td>
-                    </tr>
-                    <tr>
-                        <td>Reflexología Podal</td>
-                        <td>45 min</td>
-                        <td>40€</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p>Pregunta por nuestros paquetes especiales y bonos regalo.</p>
-        </section>
+            <!-- Sección Experiencia -->
+            <section id="experiencia" class="section experiencia">
+                <h2>Nuestra Experiencia</h2>
+                <div class="experiencia-grid">
+                    <div class="experiencia-card">
+                        <h3>15 Años de Experiencia</h3>
+                        <p>Desde 2009, hemos dedicado nuestra pasión y conocimiento a brindar la mejor experiencia de relajación y bienestar. Nuestro equipo de terapeutas certificados cuenta con amplia formación en técnicas de masaje tradicionales y modernas.</p>
+                    </div>
+                    <div class="experiencia-card">
+                        <h3>Filosofía de Bienestar</h3>
+                        <p>Creemos que el bienestar es un estado integral que abarca cuerpo, mente y espíritu. Cada sesión está diseñada para crear un espacio de sanación donde puedas desconectar del estrés diario y reconectar contigo mismo.</p>
+                    </div>
+                    <div class="experiencia-card">
+                        <h3>Ambiente Sereno</h3>
+                        <p>Nuestro centro ha sido cuidadosamente diseñado para crear una atmósfera de paz y tranquilidad. Desde la música suave hasta los aromas naturales, cada detalle está pensado para tu máximo confort y relajación.</p>
+                    </div>
+                </div>
+            </section>
 
-        <section id="ubicacion">
-            <h2>Dónde Encontrarnos</h2>
-            <p>Estamos ubicados en:</p>
-            <address>
-                Calle Ficticia, 123<br>
-                08001 Barcelona, España
-            </address>
-            <p>Nuestro horario es de Lunes a Viernes de 10:00 a 20:00, y Sábados de 10:00 a 14:00.</p>
-        </section>
+            <!-- Sección Servicios -->
+            <section id="servicios" class="section servicios">
+                <h2>Servicios y Precios</h2>
+                <div class="servicios-grid">
+                    <div class="servicio-card">
+                        <h3>Masaje Relajante</h3>
+                        <p>Técnica suave y envolvente que utiliza movimientos largos y fluidos para relajar los músculos y calmar la mente. Ideal para reducir el estrés y la ansiedad.</p>
+                        <div class="precio">60 min - 65€</div>
+                    </div>
+                    <div class="servicio-card">
+                        <h3>Masaje Descontracturante</h3>
+                        <p>Masaje terapéutico profundo que se enfoca en liberar nudos y tensiones musculares. Perfecto para dolores de espalda, cuello y hombros.</p>
+                        <div class="precio">60 min - 75€</div>
+                    </div>
+                    <div class="servicio-card">
+                        <h3>Masaje Deportivo</h3>
+                        <p>Especializado en deportistas y personas activas. Ayuda a prevenir lesiones, mejorar el rendimiento y acelerar la recuperación muscular.</p>
+                        <div class="precio">60 min - 80€</div>
+                    </div>
+                    <div class="servicio-card">
+                        <h3>Masaje con Piedras Calientes</h3>
+                        <p>Técnica ancestral que combina el masaje tradicional con piedras volcánicas calientes que penetran en los músculos más profundos.</p>
+                        <div class="precio">75 min - 90€</div>
+                    </div>
+                    <div class="servicio-card">
+                        <h3>Masaje Prenatal</h3>
+                        <p>Masaje especializado para mujeres embarazadas que alivia las molestias del embarazo y proporciona relajación profunda.</p>
+                        <div class="precio">60 min - 70€</div>
+                    </div>
+                    <div class="servicio-card">
+                        <h3>Reflexología Podal</h3>
+                        <p>Técnica que estimula puntos específicos en los pies para promover la sanación y el equilibrio en todo el cuerpo.</p>
+                        <div class="precio">45 min - 55€</div>
+                    </div>
+                </div>
+            </section>
 
-        <section id="contacto">
-            <h2>Contacto</h2>
-            <p>¿Tienes alguna pregunta o te gustaría reservar una cita? Completa el formulario y te enviaremos la información directamente a tu cliente de correo.</p>
-            <form id="contactForm">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+            <!-- Sección Ubicación -->
+            <section id="ubicacion" class="section ubicacion">
+                <h2>Nuestra Ubicación</h2>
+                <div class="ubicacion-content">
+                    <div class="map-placeholder">
+                        <div>
+                            <h3>Mapa Interactivo</h3>
+                            <p>Aquí se mostraría el mapa de Google Maps<br>con nuestra ubicación exacta</p>
+                            <small>(Placeholder para mapa incrustado)</small>
+                        </div>
+                    </div>
+                    <div class="direccion-info">
+                        <h3>Información de Contacto</h3>
+                        <div class="info-item">
+                            <strong>Dirección:</strong><br>
+                            Calle de la Tranquilidad, 123<br>
+                            28001 Madrid, España
+                        </div>
+                        <div class="info-item">
+                            <strong>Horarios:</strong><br>
+                            Lunes a Viernes: 9:00 - 21:00<br>
+                            Sábados: 10:00 - 20:00<br>
+                            Domingos: 11:00 - 18:00
+                        </div>
+                        <div class="info-item">
+                            <strong>Teléfono:</strong><br>
+                            +34 123 456 789
+                        </div>
+                        <div class="info-item">
+                            <strong>Email:</strong><br>
+                            info@serenityspa.com
+                        </div>
+                        <div class="info-item">
+                            <strong>Transporte:</strong><br>
+                            Metro: Línea 1, Estación Sol<br>
+                            Autobús: Líneas 3, 25, 39
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+            <!-- Sección Contacto -->
+            <section id="contacto" class="section contacto">
+                <h2>Contacto y Reservas</h2>
+                <div class="contacto-content">
+                    <div class="contacto-info">
+                        <h3>Reserva tu Cita</h3>
+                        <p>Para reservar tu sesión de masaje o realizar cualquier consulta, puedes contactarnos a través de los siguientes medios:</p>
 
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono">
+                        <div class="info-item">
+                            <strong>📞 Teléfono:</strong><br>
+                            +34 123 456 789
+                        </div>
+                        <div class="info-item">
+                            <strong>📧 Email:</strong><br>
+                            reservas@serenityspa.com
+                        </div>
+                        <div class="info-item">
+                            <strong>🕒 Horario de Atención:</strong><br>
+                            Lunes a Viernes: 9:00 - 21:00<br>
+                            Sábados: 10:00 - 20:00<br>
+                            Domingos: 11:00 - 18:00
+                        </div>
 
-                <label for="mensaje">Mensaje:</label>
-                <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+                        <p><strong>Política de Reservas:</strong> Te recomendamos reservar con al menos 24 horas de antelación. Las cancelaciones deben realizarse con 4 horas de anticipación.</p>
+                    </div>
 
-                <button type="submit">Enviar por Email</button>
-                <div id="formMessage"></div>
-            </form>
-            <p>También puedes contactarnos directamente:</p>
-            <ul>
-                <li>Teléfono: <a href="tel:+34123456789">+34 123 456 789</a></li>
-                <li>Email: <a href="mailto:info@masajesarmonia.com">info@masajesarmonia.com</a></li>
-            </ul>
-        </section>
-    </main>
+                    <div class="contacto-form">
+                        <h3>Formulario de Contacto</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="nombre">Nombre completo</label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono (opcional)</label>
+                                <input type="tel" id="telefono" name="telefono" placeholder="+34 123 456 789">
+                            </div>
+                            <div class="form-group">
+                                <label for="mensaje">Mensaje</label>
+                                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Cuéntanos en qué podemos ayudarte, qué servicio te interesa o cualquier pregunta que tengas..." required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
-    <footer>
-        <p>&copy; 2025 Masajes Armonía. Todos los derechos reservados.</p>
-    </footer>
+    <script>
+        // Función para mostrar secciones
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
 
-    <script src="script.js"></script>
+            // Remover clase active de todos los botones del menú
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+
+            // Agregar clase active al botón correspondiente del menú
+            navItems.forEach(item => {
+                if (item.onclick && item.onclick.toString().includes(`'${sectionId}'`)) {
+                    item.classList.add('active');
+                }
+            });
+
+            // Ocultar menú en móvil después de hacer clic
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('mobile-visible');
+            }
+        }
+
+        // Función para toggle del menú móvil
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('mobile-visible');
+        }
+
+        // Cerrar menú móvil al hacer clic fuera
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+
+            if (window.innerWidth <= 768 &&
+                !sidebar.contains(event.target) &&
+                !menuBtn.contains(event.target)) {
+                sidebar.classList.remove('mobile-visible');
+            }
+        });
+
+        // Manejar el formulario de contacto
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Obtener los valores del formulario
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            const mensaje = document.getElementById('mensaje').value;
+
+            // Simular envío del formulario
+            alert(`¡Gracias ${nombre}! Tu mensaje ha sido enviado correctamente. Te contactaremos pronto a ${email}.`);
+
+            // Limpiar el formulario
+            this.reset();
+        });
+
+        // Ajustar el diseño responsive
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('mobile-visible');
+            }
+        });
+    </script>
 </body>
 </html>
